@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ThemeToggle } from './App.jsx'
 
 function Memo() {
   const navigate = useNavigate()
@@ -81,6 +82,7 @@ function Memo() {
           ← 홈
         </button>
         <h1>Memo</h1>
+        <ThemeToggle />
       </div>
 
       <div className="memo-layout">

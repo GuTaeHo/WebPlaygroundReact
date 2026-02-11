@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ThemeToggle } from './App.jsx'
 import { LineChart, Line, ResponsiveContainer, YAxis, XAxis, Tooltip } from 'recharts'
 
 const CURRENCIES = [
@@ -366,6 +367,7 @@ function Stock() {
           ← 홈
         </button>
         <h1>주가 지수</h1>
+        <ThemeToggle />
       </div>
 
       <div className="section-group">
