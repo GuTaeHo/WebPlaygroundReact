@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ThemeToggle } from './App.jsx'
+import { ThemeToggle } from '../theme/ThemeContext.jsx'
 import { LineChart, Line, ResponsiveContainer, YAxis, XAxis, Tooltip } from 'recharts'
+import './Stock.css'
 
 const CURRENCIES = [
   { symbol: 'KRW=X', name: 'USD/KRW', flag: '🇺🇸🇰🇷', unit: '원' },

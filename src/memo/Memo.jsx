@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ThemeToggle } from './App.jsx'
+import { ThemeToggle } from '../theme/ThemeContext.jsx'
+
+import './Memo.css'
 
 function Memo() {
   const navigate = useNavigate()

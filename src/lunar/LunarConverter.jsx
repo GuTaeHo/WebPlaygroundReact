@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeToggle } from "./App.jsx";
+import { ThemeToggle } from '../theme/ThemeContext.jsx';
+import './LunarConverter.css';
 import KoreanLunarCalendar from "korean-lunar-calendar";
 
 const calendar = new KoreanLunarCalendar();

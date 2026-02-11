@@ -1,0 +1,170 @@
+.memo-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .memo-layout {
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .memo-form {
+    position: sticky;
+    top: 2rem;
+    flex: 2;
+    margin-bottom: 0;
+  }
+
+  .memo-list,
+  .memo-layout > .empty-message {
+    flex: 1;
+  }
+}
+
+.memo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.memo-form input,
+.memo-form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #2a2a2a;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.memo-form input:focus,
+.memo-form textarea:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form-actions button {
+  padding: 0.6rem 1.4rem;
+}
+
+.btn-cancel {
+  background: #555;
+}
+
+.btn-cancel:hover {
+  border-color: #999;
+}
+
+.empty-message {
+  text-align: center;
+  color: #888;
+  margin-top: 3rem;
+}
+
+.memo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.memo-card {
+  background: #2a2a2a;
+  border: 1px solid #393939;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.memo-card:hover {
+  border-color: #555;
+}
+
+.memo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.memo-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  word-break: break-word;
+}
+
+.memo-actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.memo-actions button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.btn-delete {
+  color: #ff6b6b;
+}
+
+.btn-delete:hover {
+  border-color: #ff6b6b;
+}
+
+.memo-content {
+  margin: 0.75rem 0 0.5rem;
+  color: #bbb;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+
+.memo-date {
+  font-size: 0.75rem;
+  color: #777;
+}
+
+:root.light .memo-form input,
+:root.light .memo-form textarea {
+  background: #fff;
+  border-color: #ddd;
+}
+
+:root.light .memo-card {
+  background: #fff;
+  border-color: #e0e0e0;
+}
+
+:root.light .memo-card:hover {
+  border-color: #ccc;
+}
+
+:root.light .memo-content {
+  color: #555;
+}
+
+:root.light .btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+:root.light .form-actions button {
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+:root.light .form-actions button:hover {
+  border-color: #646cff;
+}
