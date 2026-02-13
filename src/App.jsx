@@ -4,6 +4,7 @@ import Home from './home/Home.jsx'
 import Memo from './memo/Memo.jsx'
 import Stock from './stock/Stock.jsx'
 import LunarConverter from './lunar/LunarConverter.jsx'
+import CompoundInterest from './compound/CompoundInterest.jsx'
 import './App.css'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path="/memo" element={<Memo />} />
           <Route path="/stock" element={<Stock />} />
           <Route path="/lunar" element={<LunarConverter />} />
+          <Route path="/compound" element={<CompoundInterest />} />
         </Routes>
       </div>
     </ThemeProvider>

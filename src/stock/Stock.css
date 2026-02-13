@@ -384,6 +384,18 @@
 
 :root.light .range-tab:hover {
   border-color: #bbb;
+  color: #555;
+}
+
+:root.light .range-tab.active {
+  background: #646cff;
+  color: #fff;
+  border-color: #646cff;
+}
+
+:root.light .range-tab.active:hover {
+  border-color: #646cff;
+  color: #fff;
 }
 
 :root.light .stock-tooltip {

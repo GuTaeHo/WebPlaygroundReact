@@ -27,6 +27,11 @@ function Home() {
           <div className="app-card-title">음력 변환기</div>
           <div className="app-card-desc">양력과 음력을 서로 변환하세요</div>
         </button>
+        <button className="app-card-link" onClick={() => navigate('/compound')}>
+          <div className="app-icon">💰</div>
+          <div className="app-card-title">복리 계산기</div>
+          <div className="app-card-desc">복리 투자 수익을 계산하세요</div>
+        </button>
       </div>
     </div>
   )
