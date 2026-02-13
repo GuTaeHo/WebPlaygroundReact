@@ -11,16 +11,16 @@ const CURRENCIES = [
 ]
 
 const INDICES = [
-  { symbol: '^GSPC', name: 'S&P 500', flag: '🇺🇸' },
-  { symbol: '^IXIC', name: 'NASDAQ', flag: '🇺🇸' },
-  { symbol: '^DJI', name: 'Dow Jones', flag: '🇺🇸' },
-  { symbol: '^KS11', name: 'KOSPI', flag: '🇰🇷' },
-  { symbol: '^KQ11', name: 'KOSDAQ', flag: '🇰🇷' },
-  { symbol: '^N225', name: 'Nikkei 225', flag: '🇯🇵' },
-  { symbol: '^GDAXI', name: 'DAX', flag: '🇩🇪' },
-  { symbol: '^FTSE', name: 'FTSE 100', flag: '🇬🇧' },
-  { symbol: '000001.SS', name: 'Shanghai', flag: '🇨🇳' },
-  { symbol: '^HSI', name: 'Hang Seng', flag: '🇭🇰' },
+  { symbol: '^GSPC', name: 'S&P 500', flag: '🇺🇸', desc: '미국 대형주 500개로 구성된 대표 지수', example: '애플, 마이크로소프트, 아마존 등' },
+  { symbol: '^IXIC', name: 'NASDAQ', flag: '🇺🇸', desc: '미국 기술주 중심의 나스닥 종합 지수', example: '애플, 엔비디아, 테슬라 등' },
+  { symbol: '^DJI', name: 'Dow Jones', flag: '🇺🇸', desc: '미국 우량 대형주 30개로 구성된 산업평균 지수', example: '골드만삭스, 보잉, 월마트 등' },
+  { symbol: '^KS11', name: 'KOSPI', flag: '🇰🇷', desc: '한국 유가증권시장 상장 종목 종합 지수', example: '삼성전자, SK하이닉스, 현대차 등' },
+  { symbol: '^KQ11', name: 'KOSDAQ', flag: '🇰🇷', desc: '한국 코스닥시장 상장 종목 종합 지수', example: '에코프로, HLB, 알테오젠 등' },
+  { symbol: '^N225', name: 'Nikkei 225', flag: '🇯🇵', desc: '일본 도쿄증권거래소 대표 225개 종목 지수', example: '도요타, 소니, 닌텐도 등' },
+  { symbol: '^GDAXI', name: 'DAX', flag: '🇩🇪', desc: '독일 프랑크푸르트 증권거래소 주요 40개 종목 지수', example: 'SAP, 지멘스, 폭스바겐 등' },
+  { symbol: '^FTSE', name: 'FTSE 100', flag: '🇬🇧', desc: '영국 런던증권거래소 시가총액 상위 100개 종목 지수', example: '쉘, HSBC, 아스트라제네카 등' },
+  { symbol: '000001.SS', name: 'Shanghai', flag: '🇨🇳', desc: '중국 상하이증권거래소 종합 지수', example: '마오타이, ICBC, 페트로차이나 등' },
+  { symbol: '^HSI', name: 'Hang Seng', flag: '🇭🇰', desc: '홍콩 항셍 대표 종목 지수', example: '텐센트, 알리바바, AIA 등' },
 ]
 
 const RANGES = [
@@ -124,6 +124,30 @@ function CurrencyCard({ item, data, loading, error }) {
   )
 }
 
+function InfoBubble({ text, example }) {
+  const [show, setShow] = useState(false)
+  return (
+    <span className="info-bubble-wrap">
+      <button className="info-bubble-btn" onClick={() => setShow(v => !v)}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+      </button>
+      {show && (
+        <>
+          <div className="info-bubble-overlay" onClick={() => setShow(false)} />
+          <div className="info-bubble-popup">
+            <div>{text}</div>
+            {example && <div className="info-bubble-example">({example})</div>}
+          </div>
+        </>
+      )}
+    </span>
+  )
+}
+
 function IndexCard({ index, data, loading, error, rangeKey }) {
   const isPositive = data && data.change >= 0
   const color = isPositive ? '#22c55e' : '#ef4444'
@@ -137,6 +161,7 @@ function IndexCard({ index, data, loading, error, rangeKey }) {
         <div className="stock-info">
           <span className="stock-flag">{index.flag}</span>
           <span className="stock-name">{index.name}</span>
+          {index.desc && <InfoBubble text={index.desc} example={index.example} />}
         </div>
         {loading && <span className="stock-loading">불러오는 중...</span>}
         {error && <span className="stock-error">로드 실패</span>}

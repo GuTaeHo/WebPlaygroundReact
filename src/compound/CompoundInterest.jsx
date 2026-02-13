@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ThemeToggle } from '../theme/ThemeContext.jsx'
 import './CompoundInterest.css'
@@ -15,6 +15,26 @@ function addCommas(v) {
 
 function stripCommas(v) {
   return v.replace(/,/g, '')
+}
+
+function EyeIcon({ visible, onClick }) {
+  return (
+    <button className="ci-eye-btn" onClick={onClick} title={visible ? '숨기기' : '표시'}>
+      {visible ? (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+          <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+          <line x1="1" y1="1" x2="23" y2="23" />
+        </svg>
+      )}
+    </button>
+  )
 }
 
 const DIGITS = ['', '일', '이', '삼', '사', '오', '육', '칠', '팔', '구']
@@ -50,7 +70,9 @@ function CompoundInterest() {
   const [monthly, setMonthly] = useState('')
   const [rate, setRate] = useState('')
   const [years, setYears] = useState('')
-  const [result, setResult] = useState(null)
+  const [showDeposit, setShowDeposit] = useState(true)
+  const [showInterest, setShowInterest] = useState(true)
+  const [showDiff, setShowDiff] = useState(true)
 
   const handleNumber = (setter, allowDecimal = false) => (e) => {
     const raw = stripCommas(e.target.value)
@@ -60,13 +82,13 @@ function CompoundInterest() {
     setter(v)
   }
 
-  const calculate = () => {
+  const result = useMemo(() => {
     const P = Number(principal) || 0
     const M = Number(monthly) || 0
     const r = (Number(rate) || 0) / 100
     const t = Number(years) || 0
 
-    if (r === 0 && t === 0) return
+    if (r === 0 && t === 0) return null
 
     const months = t * 12
     const monthlyRate = r / 12
@@ -98,13 +120,13 @@ function CompoundInterest() {
       })
     }
 
-    setResult({
+    return {
       finalAmount: Math.round(finalAmount),
       totalDeposit: Math.round(totalDeposit),
       totalInterest: Math.round(totalInterest),
       breakdown,
-    })
-  }
+    }
+  }, [principal, monthly, rate, years])
 
   return (
     <div className="page">
@@ -172,7 +194,6 @@ function CompoundInterest() {
               <span className="ci-unit">년</span>
             </div>
           </label>
-          <button className="ci-btn" onClick={calculate}>계산하기</button>
         </div>
       </div>
 
@@ -210,9 +231,18 @@ function CompoundInterest() {
                   <thead>
                     <tr>
                       <th>연차</th>
-                      <th>누적 원금</th>
-                      <th>누적 이자</th>
-                      <th>이자 증가분</th>
+                      <th className={`ci-th-toggle${showDeposit ? '' : ' ci-th-hidden'}`}>
+                        누적 원금
+                        <EyeIcon visible={showDeposit} onClick={() => setShowDeposit(v => !v)} />
+                      </th>
+                      <th className={`ci-th-toggle${showInterest ? '' : ' ci-th-hidden'}`}>
+                        누적 이자
+                        <EyeIcon visible={showInterest} onClick={() => setShowInterest(v => !v)} />
+                      </th>
+                      <th className={`ci-th-toggle${showDiff ? '' : ' ci-th-hidden'}`}>
+                        이자 증가분
+                        <EyeIcon visible={showDiff} onClick={() => setShowDiff(v => !v)} />
+                      </th>
                       <th>총 잔액</th>
                     </tr>
                   </thead>
@@ -223,9 +253,9 @@ function CompoundInterest() {
                       return (
                         <tr key={row.year}>
                           <td>{row.year}년</td>
-                          <td>{formatNumber(row.deposit)}원</td>
-                          <td className="ci-interest">{formatNumber(row.interest)}원</td>
-                          <td className="ci-diff">+{formatNumber(diff)}원</td>
+                          <td>{showDeposit ? `${formatNumber(row.deposit)}원` : ''}</td>
+                          <td className={showInterest ? 'ci-interest' : ''}>{showInterest ? `${formatNumber(row.interest)}원` : ''}</td>
+                          <td className={showDiff ? 'ci-diff' : ''}>{showDiff ? `+${formatNumber(diff)}원` : ''}</td>
                           <td>{formatNumber(row.balance)}원</td>
                         </tr>
                       )

@@ -314,6 +314,68 @@
   font-size: 0.95rem;
 }
 
+.info-bubble-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.info-bubble-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem;
+  color: #555;
+  border-radius: 50%;
+  transition: color 0.2s;
+}
+
+.info-bubble-btn:hover {
+  color: #646cff;
+}
+
+.info-bubble-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+}
+
+.info-bubble-popup {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  background: #333;
+  color: #eee;
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  white-space: nowrap;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.info-bubble-example {
+  font-size: 0.72rem;
+  color: #888;
+  margin-top: 0.2rem;
+}
+
+.info-bubble-popup::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+}
+
 .stock-price-info {
   text-align: right;
 }
@@ -444,6 +506,29 @@
 :root.light .currency-card {
   background: #fff;
   border-color: #e0e0e0;
+}
+
+:root.light .info-bubble-btn {
+  color: #aaa;
+}
+
+:root.light .info-bubble-btn:hover {
+  color: #646cff;
+}
+
+:root.light .info-bubble-popup {
+  background: #fff;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:root.light .info-bubble-popup::after {
+  border-top-color: #fff;
+}
+
+:root.light .info-bubble-example {
+  color: #999;
 }
 
 :root.light .currency-name {

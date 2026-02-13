@@ -136,6 +136,34 @@
   margin: 0 0 0.75rem;
 }
 
+.ci-th-toggle {
+  white-space: nowrap;
+}
+
+.ci-th-hidden {
+  opacity: 0.4;
+}
+
+.ci-eye-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.15rem;
+  margin-left: 0.3rem;
+  color: #666;
+  vertical-align: middle;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.ci-eye-btn:hover {
+  color: #646cff;
+  background: rgba(100, 108, 255, 0.15);
+}
+
 .ci-table-wrap {
   overflow-x: auto;
 }
@@ -199,6 +227,15 @@
 
 :root.light .ci-table td {
   border-bottom-color: #f0f0f0;
+}
+
+:root.light .ci-eye-btn {
+  color: #aaa;
+}
+
+:root.light .ci-eye-btn:hover {
+  color: #646cff;
+  background: rgba(100, 108, 255, 0.1);
 }
 
 :root.light .ci-summary-korean {
