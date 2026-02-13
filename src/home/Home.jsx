@@ -12,11 +12,6 @@ function Home() {
         <ThemeToggle />
       </div>
       <div className="app-grid">
-        <button className="app-card-link" onClick={() => navigate('/memo')}>
-          <div className="app-icon">📝</div>
-          <div className="app-card-title">메모장</div>
-          <div className="app-card-desc">간단한 메모를 작성하고 관리하세요</div>
-        </button>
         <button className="app-card-link" onClick={() => navigate('/stock')}>
           <div className="app-icon">📈</div>
           <div className="app-card-title">주식 차트</div>
@@ -32,7 +27,7 @@ function Home() {
           <div className="app-card-title">복리 계산기</div>
           <div className="app-card-desc">복리 투자 수익을 계산하세요</div>
         </button>
-        <button className="app-card-link" onClick={() => navigate('/meal')}>
+        <button className="app-card-link" onClick={() => navigate('/runch')}>
           <div className="app-icon">🍽️</div>
           <div className="app-card-title">식비 계산기</div>
           <div className="app-card-desc">일주일 식비를 정산하세요</div>

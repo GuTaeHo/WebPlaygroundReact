@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "../theme/ThemeContext.jsx";
-import "./MealCalculator.css";
+import "./RunchCalculator.css";
 
 function addCommas(v) {
   const [int, dec] = v.split(".");
@@ -39,7 +39,7 @@ function formatDate(d) {
   return `${d.getMonth() + 1}/${d.getDate()} (${DAY_NAMES[d.getDay()]})`;
 }
 
-const STORAGE_KEY = "meal-nicknames";
+const STORAGE_KEY = "runch-nicknames";
 
 function loadNicknames() {
   try {
@@ -61,7 +61,7 @@ function reorder(arr, from, to) {
   return next;
 }
 
-function MealCalculator() {
+function RunchCalculator() {
   const navigate = useNavigate();
   const [nicknames, setNicknames] = useState(() => loadNicknames());
   const [showPopup, setShowPopup] = useState(false);
@@ -616,4 +616,4 @@ function MealCalculator() {
   );
 }
 
-export default MealCalculator;
+export default RunchCalculator;
